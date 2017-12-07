@@ -26,3 +26,6 @@ Desktop.ini
 /.project
 /.buildpath
 /.settings
+
+# Vagrant logs
+/*.log

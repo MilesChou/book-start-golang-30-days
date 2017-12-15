@@ -17,3 +17,6 @@ Go 是最近流行的語言之一，許多知名的工具或服務都使用 Go �
 * Day 1 - [Let's Golang](docs/day01.md)
 * Day 2 - [環境建置](docs/day02.md)
 * Day 3 - [Hello World](docs/day03.md)
+* Day 4 - [Constants](docs/day04.md)
+* Day 5 - [Variables & Constants declarations](docs/day05.md)
+* Day 6 - [Types (1/3) －－ Predeclared Type](docs/day06.md)

@@ -1,92 +1,148 @@
-# Types (1/3) －－ Predeclared Type
+# Variables & Constants declarations
 
-[中華小當家][]的劉昴星曾說過：「鍋子是火燄的化身」，使用鍋子也是中華廚師的必學基礎之一；而在一個程式語言裡，資料型別是資料的化身，同樣也是重要的基礎功。廚師練好基礎功，能煮出佳餚；開發者練好基礎功，才有辦法寫出千變萬化的應用程式。
+[昨天][Day 4]學到了實字常數（literal constants）該如何表示，今天來了解如何宣告變數（Variables）與常數（Constants）。
 
-Go 的資料型別有 11 種，跟大多數語言一樣分成兩大類： *Predeclared Type*（預定義型別） 、 *Composite types*（複合型別）
+## 變數宣告
 
-今天先介紹 *Predeclared Type*　，它們也是「有名稱的型態（Named Type）」。
-
-## Boolean types
-
-最簡單的型別－－ `bool` ，它只有兩個預定義的常數 `true` 和 `false` 。
-
-## Numeric types
-
-`numeric` 型態包含了 integer （整數）、 float（浮點數）、 complex（複數）三種。
-
-整數又分帶號 `int` 與不帶號 `uint` 兩類，也可以直接指定大小 `int8` 、 `int16` 、 `int32` 、 `int64` 或是不帶號的 `uint8` 、 `uint16` 、 `uint32` 、 `uint64` ，這些相信一看就知道佔了多少容量（bit）。至於 `int` 和 `uint` 會使用哪一個要看平台實作決定，有可能是 32 bit 也有可能是 64 bit。
-
-而另外還有兩個整數型態： `rune` 是 `int32` 的別名， `byte` 是 `int8` 的別名。
-
-float 有 `float32` 與 `float64` 兩種，但沒有 `float` 。
-
-complex 則表示複數，以 RE + IMi 的方法表示，如：
+宣告變數使用 `var` 關鍵字，下面宣告了 num 變數為 int 型態，並給初始值為 10：
 
 ```go
-10+5i
+var num int = 10
 ```
 
-大小則有分 `complex64` 與 `complex128` 兩種。
-
-Go 內建的 math 套件提供常數取得各型態的最大值和最小值，除了解整數範圍外，也有助於實作上的判斷。
-
-如：
+使用 IDE 會提示說， `int` 可以省略，因為 Go 會自動推斷 10 的型態為 `int` ，因此也可以這樣宣告：
 
 ```go
-package main
-
-import "fmt"
-import "math"
-
-func main() {
-	fmt.Println(math.MinInt8)
-	fmt.Println(math.MaxInt8)
-	fmt.Println(math.MinInt16)
-	fmt.Println(math.MaxInt16)
-	fmt.Println(math.MinInt32)
-	fmt.Println(math.MaxInt32)
-	fmt.Println(math.MinInt64)
-	fmt.Println(math.MaxInt64)
-	
-	// Uint 最小值是 0
-	fmt.Println(math.MaxUint8)
-	fmt.Println(math.MaxUint16)
-	fmt.Println(math.MaxUint32)
-	fmt.Println(math.MaxUint64)
-	
-	// Float 的表示是最小非 0 浮點數
-	fmt.Println(math.SmallestNonzeroFloat32)
-	fmt.Println(math.MaxFloat32)
-	fmt.Println(math.SmallestNonzeroFloat64)
-	fmt.Println(math.MaxFloat64)
-}
+var num = 10
 ```
 
-需要注意的是，不同的數字型態，是不能直接摻在一起操作的。如 int8 不能跟 uint8 相加。另外， int 有可能是 32 位元，但 int 也不能跟 int32 相加。
-
-## String types
-
-Go 語言字串都是 UTF-8 字元集編碼，它可以正常的處理多國語言。字串可以使用雙引號 `"` 或反引號 `` ` `` 定義，也可以相加，如：
+如果不給初始值的話，預定義變數都會有預設值， Go 語言稱之為零值（[The zero value][]） ， `int` 的零值是 0 ，所以下面兩行宣告是等價的：
 
 ```go
-package main
-
-import "fmt"
-
-func main() {
-	fmt.Println("Hello 雙引號")
-	fmt.Println(`Hello 反引號`)
-	fmt.Println("雙引號" + `反引號`)
-}
+var num int = 0
+var num int
 ```
+
+Go 可以一次宣告多個變數，下面的型態分別會推斷為 `string` 、 `int` 、 `float64`：
+
+```go
+var name, age, height = "Miles", 18, 169.9
+```
+
+也可以分多行宣告
+
+```go
+var (
+	name = "Miles"
+	age = 18
+	height = 169.9
+)
+```
+
+多行宣告並指定型態與指定初始值
+
+```go
+var (
+	name string = "Miles"
+	age uint = 18
+	height float32 = 169.9
+)
+```
+
+多行宣告並指定型態不指定初始值
+
+```go
+var (
+	name string
+	age uint
+	height float32
+)
+```
+
+## 短變數宣告
+
+在 func 裡，如果要宣告變數同時指定初值，可以使用[短變數宣告][Short variable declarations]：
+
+```go
+name := "Miles"
+age := 18
+height := 169.9
+```
+
+> 這裡就如同 PHP 的 `$name = 'Miles'` 一樣，宣告變數同時給值
+
+一樣可以寫成一行
+
+```go
+name, age, height := "Miles", 18, 169.9
+```
+
+## 常數宣告
+
+宣告變數使用 `const` 關鍵字，下面宣告了 num 變數為 int 型態，並給值為 10：
+
+```go
+const num int = 10
+```
+
+這時 num 會是不可變的常數，試圖指定新值會在編譯時期報錯。
+
+```go
+const num int = 10
+
+// Error
+num = 20
+```
+
+除了常數一定要給值外，其他宣告的方法都跟變數一樣，如一次宣告多個常數
+
+```go
+const name, age, height = "Miles", 18, 169.9
+```
+
+多行宣告
+
+```go
+const (
+	name = "Miles"
+	age = 18
+	height = 169.9
+)
+```
+
+多行宣告並指定型態
+
+```go
+const (
+	name string = "Miles"
+	age uint = 18
+	height float32 = 169.9
+)
+```
+
+## 宣告後沒使用會？
+
+變數宣告了就是要用，不然要幹嘛？如果宣告了一個 num 變數沒使用， Go 會在編譯時期出錯：
+
+```
+./hello.go:8:6: num declared and not used
+```
+
+常數則可以宣告但不使用。
 
 ## 今日回顧
 
-今天是蹲馬步的基本功，後面的複合型態將會使用這些基本型態炒出各式各樣的菜色。
+* 學習了兩個關鍵字（5/23）
+  + `var` 宣告變數
+  + `const` 宣告常數
 
 ## 參考資料
 
-* [The Go Programming Language Specification](https://golang.org/ref/spec#Types)
-* [認識預定義型態](https://openhome.cc/Gossip/Go/PreDeclaredType.html)
+* [變數宣告、常數宣告][] | 良葛格學習筆記
+* [The zero value][] | The Go Programming Language Specification
+* [Short variable declarations][] | The Go Programming Language Specification
 
-[中華小當家]: https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%8F%AF%E5%B0%8F%E7%95%B6%E5%AE%B6
+[變數宣告、常數宣告]: https://openhome.cc/Gossip/Go/VariableConstantDeclaration.html
+[The zero value]: https://golang.org/ref/spec#The_zero_value
+[Short variable declarations]: https://golang.org/ref/spec#Short_variable_declarations
+[Day 4]: /docs/day04.md

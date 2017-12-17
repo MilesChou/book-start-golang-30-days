@@ -3,7 +3,7 @@
 Go 語言的常數有分幾種類型：
 
 * *boolean constants* ，布林常數。
-* *rune constants* ， rune 是 int32 的別名，它是用來表示一個 Unicode 的字元。
+* *rune constants* ，表示字元的常數。
 * *integer constants* ，整數常數
 * *floating-point constants* ，浮點數常數
 * *complex constants* ，複數常數
@@ -11,7 +11,7 @@ Go 語言的常數有分幾種類型：
 
 這些常數都可以用實字（literal）表示，實字又分成下面幾種：
 
-* *rune literal* ， Unicode 實字
+* *rune literal* ， Rune 實字
 * *integer literal* ，整數實字
 * *floating-point literal* ，浮點數實字
 * *imaginary literal* ，虛數實字

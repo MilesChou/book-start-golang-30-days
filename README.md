@@ -20,3 +20,4 @@ Go 是最近流行的語言之一，許多知名的工具或服務都使用 Go �
 * Day 4 - [Constants](docs/day04.md)
 * Day 5 - [Variables & Constants declarations](docs/day05.md)
 * Day 6 - [Predeclared Type](docs/day06.md)
+* Day 7 - [Array Type](docs/day07.md)

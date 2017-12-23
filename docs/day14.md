@@ -68,14 +68,15 @@ type People struct {
 	age   int
 }
 
-func (people People) Hello() string {
-	return `Hi! I am ` + people.name
+func (people People) Hello(other People) string {
+	return `Hi! ` + other.name + `, I am ` + people.name
 }
 
 func main() {
+	other := People{name: `Someone`}
 	miles := People{`Miles`, 18}
 
-	fmt.Println(miles.Hello()) // Hi! Someone, I am Miles
+	fmt.Println(miles.Hello(other)) // Hi! Someone, I am Miles
 }
 ```
 

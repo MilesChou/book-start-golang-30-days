@@ -26,5 +26,5 @@ Go 是最近流行的語言之一，許多知名的工具或服務都使用 Go �
 * [Day 10 - Function declarations](docs/day10.md)
 * [Day 11 - First class function](docs/day11.md)
 * [Day 12 - Anonymous Function](docs/day12.md)
-* [Day 12 - Struct](docs/day13.md)
-* [Day 12 - Method](docs/day13.md)
+* [Day 13 - Struct](docs/day13.md)
+* [Day 14 - Method](docs/day14.md)

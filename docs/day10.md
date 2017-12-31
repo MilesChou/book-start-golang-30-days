@@ -138,8 +138,9 @@ func main() {
 
 ## 參考資料
 
-* [函式入門](https://openhome.cc/Gossip/Go/Function.html)
-* [Function declarations][]
+* [函式入門](https://openhome.cc/Gossip/Go/Function.html) | 良葛格學習筆記
+* [Function declarations][] | The Go Programming Language Specification 
+* [SOLID 之 單一職責原則（Single responsibility principle）][Refactoring Day 7] | 看到 code 寫成這樣我也是醉了，不如試試重構？
 
 [Function declarations]: https://golang.org/ref/spec#Function_declarations
 [Refactoring Day 7]: https://github.com/MilesChou/book-refactoring-30-days/blob/master/docs/day07.md

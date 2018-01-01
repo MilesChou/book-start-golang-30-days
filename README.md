@@ -40,3 +40,4 @@ Go 是最近流行的語言之一，許多知名的工具或服務都使用 Go �
 * [Day 24 - Delivery](docs/day24.md)
 * [Day 25 - Docker](docs/day25.md)
 * [Day 26 - Refactoring Name Provider](docs/day26.md)
+* [Day 27 - Refactoring Command](docs/day27.md)

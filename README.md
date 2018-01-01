@@ -37,3 +37,4 @@ Go 是最近流行的語言之一，許多知名的工具或服務都使用 Go �
 * [Day 21 - Send HTTP Request](docs/day21.md)
 * [Day 22 - Parse JSON](docs/day22.md)
 * [Day 23 - HTTP Server](docs/day23.md)
+* [Day 24 - Delivery](docs/day24.md)

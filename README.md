@@ -44,3 +44,7 @@ Go 是最近流行的語言之一，許多知名的工具或服務都使用 Go �
 * [Day 28 - Add Command Parameters](docs/day28.md)
 * [Day 29 - Interface](docs/day29.md)
 * [Day 30 - The End](docs/day30.md)
+
+## 誌謝
+
+* 良葛格無私貢獻詳細的[學習筆記](https://openhome.cc/Gossip/Go/index.html)。

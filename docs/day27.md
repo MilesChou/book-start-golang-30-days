@@ -1,10 +1,10 @@
 # Refactoring Command
 
-指令套件 [`github.com/urfave/cli`](https://github.com/urfave/cli) 算容易上手的。雖然好用，但似乎其他套件也不錯，如 [Cobra](https://github.com/spf13/cobra) 等。
+指令套件 [`github.com/urfave/cli`](https://github.com/urfave/cli) 算蠻好上手的。雖然好用，但似乎其他套件也不錯，如 [Cobra](https://github.com/spf13/cobra) 等。
 
-但目前 Command 實際處理任務的程式都是直接綁死在 `cli.Context` 上，這樣就會違反[依賴反轉原則][SOLID 之 依賴反轉原則（Dependency inversion principle）]－－應該依賴更抽象的參數，如 [*Predeclared Type*][Day 6] 或 interface 等。
+目前 Command 實際處理任務的程式都是直接依賴 `cli.Context` ，這樣會違反[依賴反轉原則][SOLID 之 依賴反轉原則（Dependency inversion principle）]－－應該依賴更抽象的參數，如 [*Predeclared Type*][Day 6] 或 *interface* 等。
 
-會發現這個問題是因為在實作 [HTTP Server][Day 23] 時，行為都沒有變，只有輸出改變而已，但卻必須要為 `/generate` 的回傳重新客製化寫法，而且這段程式碼與 `command/generate.go` 裡面的 `generate` 函式太像了，這是一個明顯的[壞味道][開發者能察覺的壞味道（Bad Smell）]，必須要重新調整設計才行。
+會發現這個問題是因為在實作 [HTTP Server][Day 23] 時，行為沒變，只有輸出改變而已，但卻必須要為 `/generate` 的回傳重新客製化寫法，而且這段程式碼與 `command/generate.go` 裡面的 `generate` 函式太像了，這是一個明顯的[壞味道][開發者能察覺的壞味道（Bad Smell）]，必須要重新調整設計才行。
 
 ## 分析
 
@@ -102,7 +102,7 @@ func serve(c *cli.Context) error {
 }
 ```
 
-同個重構方法也可以用在 `QueryCommand` ，後面就不贅述了。
+同樣的重構方法也可以用在 `QueryCommand` ，後面就不贅述了。
 
 > 另外兩個 Command ： `ServeCommand` 目前不知道該怎麼拆出來好（因為裡面也有用到 Facade ）； `StatusCommand` 則是因為太簡單，所以沒拆出來的必要。
 
@@ -133,7 +133,7 @@ func Generate(path string, count int, process GenerateItemProcess) error {
 }
 ```
 
-讓 process 可以順便把目前處理到第幾個，也傳入 Closure ， HTTP Server 也能改寫成這樣：
+讓 process 可以順便把目前處理的 index 也傳入 Closure ， HTTP Server 可以改寫成這樣：
 
 ```go
 s := make([]string, num)
@@ -143,7 +143,7 @@ facade.Generate(c.GlobalString("provider"), num, func(item string, index int) {
 })
 ```
 
-這樣算是用空間換時間，時間結果約為原本的 70% ：
+這樣算是用空間換時間，時間結果約為原本的 65% ：
 
 ```
 [GIN] 2018/01/01 - 23:41:34 | 200 |  4.963947486s |       127.0.0.1 |  GET     /generate
